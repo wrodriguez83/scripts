@@ -115,7 +115,7 @@ USE_WEATHER=0
 USE_VLC=1
 USE_SPOTIFY=1
 USE_SUBLIMEMERGE=1
-USE_TRANSMISSION=1
+USE_TORRENT=1
 USE_BRAVE=1
 USE_DISCORD=1
 USE_STREMIO=1
@@ -179,7 +179,7 @@ if_install $USE_WEATHER $TYPE gnome-weather
 if_install $USE_VLC $TYPE vlc
 if_install $USE_SPOTIFY $TYPE com.spotify.Client flatpak flathub
 if_install $USE_SUBLIMEMERGE $TYPE com.sublimemerge.App flatpak flathub
-if_install $USE_TRANSMISSION $TYPE transmission
+if_install $USE_TORRENT $TYPE de.haeckerfelix.Fragments flatpak flathub
 if_install $USE_BRAVE $TYPE com.brave.Browser flatpak flathub
 if_install $USE_DISCORD $TYPE com.discordapp.Discord flatpak flathub
 if_install $USE_STREMIO $TYPE com.stremio.Stremio flatpak flathub
