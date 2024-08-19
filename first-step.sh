@@ -124,6 +124,7 @@ USE_VSCODE=1
 USE_EDDY=0
 USE_FREEOFFICE=1
 USE_POSTGRES=1
+USE_PEEK=1
 
 if [ "$OS" = "elementary" ];then
   ADD_FLATHUB=1
@@ -185,6 +186,7 @@ if_install $USE_DISCORD $TYPE com.discordapp.Discord flatpak flathub
 if_install $USE_STREMIO $TYPE com.stremio.Stremio flatpak flathub
 if_install $USE_SLACK $TYPE com.slack.Slack flatpak flathub
 if_install $USE_VSCODE $TYPE com.visualstudio.code flatpak flathub
+if_install $USE_PEEK $TYPE com.uploadedlobster.peek flatpak flathub
 if_install $USE_EDDY $TYPE com.github.donadigo.eddy flatpak
 if_install $USE_FREEOFFICE $TYPE free-office https://www.freeoffice.com/download.php?filename=https://www.softmaker.net/down/softmaker-freeoffice-2024_1216-01_amd64.deb
 if_install $USE_POSTGRES $TYPE postgresql
