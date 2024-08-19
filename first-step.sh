@@ -28,12 +28,11 @@ update(){
   task 'Updating'
   
   if [ "$type"="apt" ]; then
-    #sudo apt update
-    #sudo apt full-upgrade -y
-    #sudo apt dist-upgrade -y
-    #sudo apt auto-remove -y
-    #flatpak update -y
-    echo 'done'
+    sudo apt update
+    sudo apt full-upgrade -y
+    sudo apt dist-upgrade -y
+    sudo apt auto-remove -y
+    flatpak update -y
   fi
 }
 
@@ -44,8 +43,7 @@ download(){
         alert $1' exist'
     else
         task 'Download '$1
-        #wget -O ~/Downloads/$1 $2
-        echo "wget -O ~/Downloads/$1 $2"
+        wget -O ~/Downloads/$1 $2
     fi
 }
 
@@ -56,15 +54,12 @@ installAPT(){
   
   task 'Installing'
   if [[ -z "$source" ]]; then
-    #sudo apt install -y $name
-    echo "sudo apt install -y $name"
+    sudo apt install -y $name
   elif [ "$source" = "flatpak" ]; then
-    #flatpak install -y --noninteractive $dest $name
-    echo "flatpak install -y --noninteractive $dest $name"
+    flatpak install -y --noninteractive $dest $name
   elif [ "${source##*.}" = "deb" ]; then
     download $name.deb $source
-    #sudo gdebi -n ~/Downloads/$name.deb
-    echo "sudo gdebi -n ~/Downloads/$name.deb"
+    sudo gdebi -n ~/Downloads/$name.deb
   fi
 }
 
@@ -79,14 +74,11 @@ install(){
   if [ "${source##*.}" = "gz" ]; then
     download $name.tar.gz $source
     task 'Installing'
-    #sudo mkdir -p $dest
-    #sudo tar zxf ~/Downloads/$name.tar.gz -C $source
-    echo "sudo mkdir -p $dest"
-    echo "sudo tar zxf ~/Downloads/$name.tar.gz -C $source"
+    sudo mkdir -p $dest
+    sudo tar zxf ~/Downloads/$name.tar.gz -C $source
   elif [ "$type" = "curl" ]; then
     task 'Installing'
-    #curl -o- $source | bash
-    echo "curl -o- $source | bash"
+    curl -o- $source | bash
   elif [ "$type" = "apt" ]; then
     installAPT $name $source $dest
   fi
@@ -159,14 +151,12 @@ if_install $USE_ATH $TYPE apt-transport-https
 section 'Add repositories'
 
 if [ "$ADD_FLATHUB" -eq 1 ];then
-  #flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-  echo "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 fi
 
 if [ "$USE_TWEAKS" -eq 1 ];then
   if [ "$OS" = "elementary" ];then
-    #sudo add-apt-repository -y ppa:philip.scott/pantheon-tweaks
-    echo "sudo add-apt-repository -y ppa:philip.scott/pantheon-tweaks"
+    sudo add-apt-repository -y ppa:philip.scott/pantheon-tweaks
   fi
 fi
 
