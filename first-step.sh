@@ -108,7 +108,7 @@ USE_TWEAKS=1
 USE_NVM=1
 USE_GIT=1
 USE_TLP=0
-USE_DISK=0
+USE_DISK=1
 USE_PAPIRUS=1
 USE_BLUEMAN=1
 USE_WEATHER=0
@@ -130,7 +130,6 @@ if [ "$OS" = "elementary" ];then
   USE_SPC=1
   USE_ATH=1
   USE_TLP=1
-  USE_DISK=1
   USE_WEATHER=1
   USE_EDDY=1
 fi
@@ -173,7 +172,7 @@ fi
 
 if_install $USE_GIT $TYPE git
 if_install $USE_TLP $TYPE tlp
-if_install $USE_DISK $TYPE gnome-disk-utility
+if_install $USE_DISK $TYPE io.gitlab.adhami3310.Impression flatpak flathub
 if_install $USE_PAPIRUS $TYPE papirus-icon-theme
 if_install $USE_BLUEMAN $TYPE blueman
 if_install $USE_WEATHER $TYPE gnome-weather
