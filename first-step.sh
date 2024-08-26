@@ -214,25 +214,24 @@ fi
 
 mkdir -p ~/projects/personal
 
-RESOLUTION="3440 1440 60"
-OUTPUT="HDMI-1"
-
-MODELINE=$(cvt $RESOLUTION | cut -f2 -d$'\n')
-MODEDATA=$(echo $MODELINE | cut -f 3- -d' ')
-MODENAME="UltraWide"
-
-echo 'echo "Adding mode - '$MODENAME $MODEDATA'"' >> ~/.profile
-echo 'xrandr --newmode "'$MODENAME'"' $MODEDATA >> ~/.profile
-echo 'xrandr --addmode '$OUTPUT $MODENAME >> ~/.profile
-echo 'CONNECTED=$(xrandr --current | grep -i "'$OUTPUT'" | cut -f2 -d" ")' >> ~/.profile
+echo 'RESOLUTION="3440 1440 60"' >> ~/.profile
+echo 'OUTPUT="HDMI-1"' >> ~/.profile
+echo 'MODELINE=$(cvt $RESOLUTION | cut -f2 -d$"\n")' >> ~/.profile
+echo 'MODEDATA=$(echo $MODELINE | cut -f 3- -d" ")' >> ~/.profile
+echo 'MODENAME="UltraWide"' >> ~/.profile
+echo 'CONNECTED=$(xrandr --current | grep -i $OUTPUT | cut -f2 -d" ")' >> ~/.profile
+echo 'echo "Adding mode - "$MODENAME $MODEDATA' >> ~/.profile
+echo 'xrandr --newmode $MODENAME $MODEDATA' >> ~/.profile
+echo 'xrandr --addmode $OUTPUT $MODENAME' >> ~/.profile
 echo 'if [ "$CONNECTED" = "connected" ]; then' >> ~/.profile
-echo '  xrandr --output '$OUTPUT' --mode '$MODENAME >> ~/.profile
+echo '  xrandr --output $OUTPUT --mode $MODENAME' >> ~/.profile
 echo 'else' >> ~/.profile
 echo '  echo "Monitor is not detected"' >> ~/.profile
 echo 'fi' >> ~/.profile
 
 echo '' >> ~/.bashrc
 echo 'alias sysup="sudo apt update && sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt auto-remove && flatpak update -y"' >> ~/.bashrc
+echo 'alias code="flatpak run com.visualstudio.code"' >> ~/.bashrc
 
 ssh-keygen -t ed25519 -C "Walter Rodriguez" -f ~/.ssh/id_warxxi -q -N ""
 
