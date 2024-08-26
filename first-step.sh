@@ -126,6 +126,7 @@ USE_FREEOFFICE=1
 USE_POSTGRES=1
 USE_PEEK=1
 USE_FONT=1
+USE_DBEAVER=1
 
 if [ "$OS" = "elementary" ];then
   ADD_FLATHUB=1
@@ -191,6 +192,7 @@ if_install $USE_PEEK $TYPE com.uploadedlobster.peek flatpak flathub
 if_install $USE_EDDY $TYPE com.github.donadigo.eddy flatpak
 if_install $USE_FREEOFFICE $TYPE free-office https://www.freeoffice.com/download.php?filename=https://www.softmaker.net/down/softmaker-freeoffice-2024_1216-01_amd64.deb
 if_install $USE_POSTGRES $TYPE postgresql
+if_install $USE_DBEAVER $TYPE io.dbeaver.DBeaverCommunity flatpak flathub
 
 if [ "$USE_FONT" -eq 1 ];then
   download MesloLGSRegular.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
