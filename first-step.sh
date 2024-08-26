@@ -226,14 +226,15 @@ echo 'xrandr --newmode "'$MODENAME'"' $MODEDATA >> ~/.profile
 echo 'xrandr --addmode '$OUTPUT $MODENAME >> ~/.profile
 echo 'CONNECTED=$(xrandr --current | grep -i "'$OUTPUT'" | cut -f2 -d" ")' >> ~/.profile
 echo 'if [ "$CONNECTED" = "connected" ]; then' >> ~/.profile
-echo 'xrandr --output '$OUTPUT' --mode '$MODENAME >> ~/.profile
+echo '  xrandr --output '$OUTPUT' --mode '$MODENAME >> ~/.profile
 echo 'else' >> ~/.profile
-echo 'echo "Monitor is not detected"' >> ~/.profile
+echo '  echo "Monitor is not detected"' >> ~/.profile
 echo 'fi' >> ~/.profile
 
 echo '' >> ~/.bashrc
 echo 'alias sysup="sudo apt update && sudo apt full-upgrade -y && sudo apt dist-upgrade -y && sudo apt auto-remove && flatpak update -y"' >> ~/.bashrc
 
+ssh-keygen -t ed25519 -C "Walter Rodriguez" -f ~/.ssh/id_warxxi -q -N ""
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
