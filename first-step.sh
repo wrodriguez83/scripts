@@ -125,6 +125,7 @@ USE_EDDY=0
 USE_FREEOFFICE=1
 USE_POSTGRES=1
 USE_PEEK=1
+USE_FONT=1
 
 if [ "$OS" = "elementary" ];then
   ADD_FLATHUB=1
@@ -160,7 +161,7 @@ if [ "$USE_TWEAKS" -eq 1 ];then
   fi
 fi
 
-if_install $USE_NVM curl nvm https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh
+if_install $USE_NVM curl nvm https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh
 
 update $TYPE
 
@@ -191,17 +192,21 @@ if_install $USE_EDDY $TYPE com.github.donadigo.eddy flatpak
 if_install $USE_FREEOFFICE $TYPE free-office https://www.freeoffice.com/download.php?filename=https://www.softmaker.net/down/softmaker-freeoffice-2024_1216-01_amd64.deb
 if_install $USE_POSTGRES $TYPE postgresql
 
-download MesloLGSRegular.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
-download MesloLGSBold.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
-download MesloLGSItalic.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
-download MesloLGSBoldItalic.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+if [ "$USE_FONT" -eq 1 ];then
+  download MesloLGSRegular.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+  download MesloLGSBold.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+  download MesloLGSItalic.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+  download MesloLGSBoldItalic.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+fi
 
 # Configuration
 section 'Configuration'
 
-sudo mkdir -p /usr/share/fonts/truetype/MesloLGS/
-sudo cp ~/Downloads/*.ttf /usr/share/fonts/truetype/MesloLGS/
-sudo fc-cache -fv
+if [ "$USE_FONT" -eq 1 ];then
+  sudo mkdir -p /usr/share/fonts/truetype/MesloLGS/
+  sudo cp ~/Downloads/*.ttf /usr/share/fonts/truetype/MesloLGS/
+  sudo fc-cache -fv
+fi
 
 if [ "$USE_TLP" -eq 1 ];then
   sudo systemctl enable tlp.service
